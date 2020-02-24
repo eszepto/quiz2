@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block context %}
+
+<form target="{% url 'calApi' %}" method="POST">
+{% csrf_token %}
+<input type="text" placeholder="X" name="X">{{ cal.X }}
+<input type="text" placeholder="op" name="op">
+<input type="text" placeholder="Y" name="Y">{{ cal.Y}}
+
+<button  class="btn btn-outline-secondary col-md-auto " type="submit">=</button>
+</form>
+<p>{{ cal.Result }}</p>
+
+{% endblock context %}
+
