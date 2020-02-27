@@ -3,15 +3,15 @@
 {% block context %}
 
 <form action="{% url 'calget' %}" method="GET" enctype="multipart/form-data">
-
+    
 <input id="input_x" type="text" placeholder="X" name="X" value="{{ X }}">
 <input id="input_op" type="text" placeholder="op" name="op" value="{{op}}" maxlength="1">
 <input id="input_y" type="text" placeholder="Y" name="Y"value="{{Y}}">
 
 <button id="enter" class="btn btn-outline-secondary col-md-auto " type="submit">=</button>
-<p id="result">{{ Result }}</p>
 </form>
 
+<p id="result">{{ Result }}</p>
 
 {% endblock context %}
 

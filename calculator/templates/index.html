@@ -2,15 +2,15 @@
 
 {% block context %}
 
-<form target="{% url 'calApi' %}" method="POST">
+<form action="{% url 'calApi' %}" method="POST" enctype="multipart/form-data">
 {% csrf_token %}
-<input type="text" placeholder="X" name="X">{{ cal.X }}
-<input type="text" placeholder="op" name="op">
-<input type="text" placeholder="Y" name="Y">{{ cal.Y}}
+<input id="input_x" type="text" placeholder="X" name="X" value="{{ X }}">
+<input id="input_op" type="text" placeholder="op" name="op" value="{{op}}" maxlength="1">
+<input id="input_y" type="text" placeholder="Y" name="Y"value="{{Y}}">
 
-<button  class="btn btn-outline-secondary col-md-auto " type="submit">=</button>
+<button id="enter" class="btn btn-outline-secondary col-md-auto " type="submit">=</button>
 </form>
-<p>{{ cal.Result }}</p>
+<p id="result">{{ Result }}</p>
 
 {% endblock context %}
 

@@ -5,42 +5,48 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 
 def main(request):
+
     return render(request,'index.html')
 
 def calApi(request):
-
-    X = float(request.POST['X'])
-    Y = float(request.POST['Y'])
+    X = request.POST['X']
+    Y = request.POST['Y']
     op = request.POST['op']
-    print(X,op,Y)
 
     c = CalculationLog()
-    c.X = X
-    c.Y = Y
+    try:
+        c.X = float(X)
+        c.Y = float(Y)
+        if op in ['+','-','*','/','%'] :
+            c.op = op
+        else:
+            raise(ValueError)
+    except:
+        c.delete()
+        return render(request,'index.html',
+                {'X':X,
+                 'op':op,
+                 'Y':Y,})
+
     
     Result = 0
-
-    if (op=='+'):
-        Result = X+Y
-        c.Result = Result
+    if op=='+':
+        c.Result = c.X + c.Y
     elif op=="-":
-        Result = X-Y
-        c.Result = Result
+        c.Result = c.X - c.Y
     elif op=="*":
-        Result = X*Y
-        c.Result = Result
+        c.Result = c.X * c.Y
     elif op=="/":
-        Result = X/Y
-        c.Result = Result
+        c.Result = c.X / c.Y
     elif op=="%":
-        Result = X%Y
-        c.Result = Result
+        c.Result = c.X % c.Y
     
     c.save()
     print(Result)
     return render(request,'index.html',
-                {'X':X, 
-                 'Y':Y, 
-                 'Result':Result})
+                {'X':X,
+                 'op':op,
+                 'Y':Y,
+                 'Result':c.Result})
 
 
