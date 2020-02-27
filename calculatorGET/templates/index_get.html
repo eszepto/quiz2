@@ -11,7 +11,19 @@
 <button id="enter" class="btn btn-outline-secondary col-md-auto " type="submit">=</button>
 </form>
 
-<p id="result">{{ Result }}</p>
 
+{% if Result %}
+    <p id="result">{{ Result }}</p>
+    <button id="conBtn" onclick="cont(this)">continue</button>
+{% endif %}
+<script>
+    function cont(button){
+    $("#input_x").attr("value", document.getElementById("result").innerHTML);
+    $("#input_op").attr("value", "")
+    $("#input_y").attr("value", "")
+    $("#conBtn").remove()
+    $("#result").remove();
+    }
+</script>
 {% endblock context %}
 
